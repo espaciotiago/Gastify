@@ -88,15 +88,19 @@ struct HomeView: View {
 
     @ViewBuilder
     private var Activities: some View {
+        let income = Register(title: "Primera quincena de enero", date: "01/01/2025", type: .income, amount: 100)
+        let outcome = Register(title: "Gasto no 1", date: "01/01/2025", type: .outcome, amount: 100)
         VStack(alignment: .leading, spacing: 16) {
             Text("Tus actividades")
                 .font(.title(size: .large))
                 .foregroundStyle(Color.dark)
                 .padding(.horizontal)
             LazyVStack(alignment: .leading, spacing: 16) {
-                RegisterCellView()
-                RegisterCellView()
-                RegisterCellView()
+                RegisterCellView(viewModel: RegisterCellViewModel(register: income))
+                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
+                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
+                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
+                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
             }
         }
     }
