@@ -29,12 +29,17 @@
 		29F32B702D2B2BBA00AEFBC0 /* GastifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GastifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		29F32B562D2B2BB900AEFBC0 /* Gastify */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Gastify;
-			sourceTree = "<group>";
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		29F32BD82D2B2EA200AEFBC0 /* Exceptions for "Gastify" folder in "Gastify" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 29F32B532D2B2BB900AEFBC0 /* Gastify */;
 		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
 		29F32B692D2B2BBA00AEFBC0 /* GastifyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GastifyTests;
@@ -43,6 +48,14 @@
 		29F32B732D2B2BBA00AEFBC0 /* GastifyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = GastifyUITests;
+			sourceTree = "<group>";
+		};
+		29F32B972D2B2CA300AEFBC0 /* Gastify */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				29F32BD82D2B2EA200AEFBC0 /* Exceptions for "Gastify" folder in "Gastify" target */,
+			);
+			path = Gastify;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -75,7 +88,7 @@
 		29F32B4B2D2B2BB900AEFBC0 = {
 			isa = PBXGroup;
 			children = (
-				29F32B562D2B2BB900AEFBC0 /* Gastify */,
+				29F32B972D2B2CA300AEFBC0 /* Gastify */,
 				29F32B692D2B2BBA00AEFBC0 /* GastifyTests */,
 				29F32B732D2B2BBA00AEFBC0 /* GastifyUITests */,
 				29F32B552D2B2BB900AEFBC0 /* Products */,
@@ -108,7 +121,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				29F32B562D2B2BB900AEFBC0 /* Gastify */,
+				29F32B972D2B2CA300AEFBC0 /* Gastify */,
 			);
 			name = Gastify;
 			packageProductDependencies = (
@@ -399,6 +412,7 @@
 				DEVELOPMENT_TEAM = 34U467K598;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gastify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -428,6 +442,7 @@
 				DEVELOPMENT_TEAM = 34U467K598;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Gastify/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
