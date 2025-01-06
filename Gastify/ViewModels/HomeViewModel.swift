@@ -7,12 +7,13 @@
 
 import Foundation
 
-enum NavigationHomeRoute: Hashable {
+enum HomeSheet: Identifiable {
+    var id: Self { self }
     case newRegister
 }
 
 class HomeViewModel: ObservableObject {
-    @Published var path = [NavigationHomeRoute]()
+    @Published var sheet: HomeSheet?
     @Published var loading = false
     @Published var loadingTotals = false
 
@@ -76,6 +77,6 @@ class HomeViewModel: ObservableObject {
     }
 
     func newRegister() {
-        self.path.append(.newRegister)
+        self.sheet = .newRegister
     }
 }

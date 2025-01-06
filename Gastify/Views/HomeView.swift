@@ -12,28 +12,26 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
 
     var body: some View {
-        NavigationStack(path: self.$viewModel.path) {
-            GeometryReader { proxy in
-                ZStack {
-                    Color.white.ignoresSafeArea(.all)
-                    VStack(alignment: .leading, spacing: 16) {
-                        Header
-                        Filters
-                        SummaryCards(cardHeight: proxy.size.width/2)
-                        Activities
-                    }
-                    if viewModel.loading {
-                        LoadingView()
-                    }
+        GeometryReader { proxy in
+            ZStack {
+                Color.white.ignoresSafeArea(.all)
+                VStack(alignment: .leading, spacing: 16) {
+                    Header
+                    Filters
+                    SummaryCards(cardHeight: proxy.size.width/2)
+                    Activities
                 }
-                .onAppear {
-                    self.viewModel.getInitialData()
+                if viewModel.loading {
+                    LoadingView()
                 }
-                .navigationDestination(for: NavigationHomeRoute.self) { route in
-                    switch route {
-                    case .newRegister:
-                        NewRegisterView()
-                    }
+            }
+            .onAppear {
+                self.viewModel.getInitialData()
+            }
+            .sheet(item: self.$viewModel.sheet) { item in
+                switch item {
+                case .newRegister:
+                    NewRegisterView()
                 }
             }
         }
