@@ -10,6 +10,7 @@ import SwiftUI
 enum CustomIcon: String {
     case arrowUp = "arrow_up"
     case arrowDown = "arrow_down"
+    case close
     case filter
     case plus
 }

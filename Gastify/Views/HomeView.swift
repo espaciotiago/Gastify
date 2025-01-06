@@ -31,7 +31,7 @@ struct HomeView: View {
             .sheet(item: self.$viewModel.sheet) { item in
                 switch item {
                 case .newRegister:
-                    NewRegisterView()
+                    NewRegisterView(viewModel: NewRegisterViewModel())
                 }
             }
         }

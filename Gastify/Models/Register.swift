@@ -7,9 +7,17 @@
 
 import Foundation
 
-enum RegisterType: String {
+enum RegisterType: String, Identifiable {
+    var id: String { rawValue }
     case income = "INCOME"
     case outcome = "OUTCOME"
+
+    var label: String {
+        switch self {
+        case .income: return "Nuevo ingreso"
+        case .outcome: return "Nuevo gasto"
+        }
+    }
 }
 
 struct Register: Identifiable {

@@ -13,6 +13,7 @@ enum HomeSheet: Identifiable {
 }
 
 class HomeViewModel: ObservableObject {
+    
     @Published var sheet: HomeSheet?
     @Published var loading = false
     @Published var loadingTotals = false
