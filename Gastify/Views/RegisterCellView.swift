@@ -46,12 +46,12 @@ struct RegisterCellView: View {
 }
 
 #Preview {
-    let income = Register(title: "Primera quincena de enero", date: "01/01/2025", type: .income, amount: 10.8778)
-    let outcome = Register(title: "Gasto no 1", date: "01/01/2025", type: .outcome, amount: 100)
-    let outcome1 = Register(title: "Gasto no 2", date: "01/01/2025", type: .outcome, amount: 10000)
-    let outcome2 = Register(title: "Gasto no 3", date: "01/01/2025", type: .outcome, amount: 100500)
-    let outcome3 = Register(title: "Gasto no 4", date: "01/01/2025", type: .outcome, amount: 1000000)
-    let outcome4 = Register(title: "Gasto no 4", date: "01/01/2025", type: .outcome, amount: 1000000000)
+    let income = Register(id: "1", title: "Primera quincena de enero", date: Date(), type: .income, amount: 10.8778)
+    let outcome = Register(id: "2", title: "Gasto no 1", date: Date(), type: .outcome, amount: 100)
+    let outcome1 = Register(id: "3", title: "Gasto no 2", date: Date(), type: .outcome, amount: 10000)
+    let outcome2 = Register(id: "4", title: "Gasto no 3", date: Date(), type: .outcome, amount: 100500)
+    let outcome3 = Register(id: "5", title: "Gasto no 4", date: Date(), type: .outcome, amount: 1000000)
+    let outcome4 = Register(id: "6", title: "Gasto no 4", date: Date(), type: .outcome, amount: 1000000000)
     Group {
         RegisterCellView(viewModel: RegisterCellViewModel(register: income))
         RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))

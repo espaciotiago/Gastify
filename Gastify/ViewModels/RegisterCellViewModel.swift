@@ -18,7 +18,7 @@ struct RegisterCellViewModel {
     }
 
     var date: String {
-        register.date
+        register.date.showText()
     }
 
     var amount: String {

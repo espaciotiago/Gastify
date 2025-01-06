@@ -8,18 +8,31 @@
 import SwiftUI
 
 struct HomeView: View {
+
+    @StateObject var viewModel: HomeViewModel
+
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: self.$viewModel.path) {
             GeometryReader { proxy in
                 ZStack {
                     Color.white.ignoresSafeArea(.all)
-                    ScrollView {
-                        VStack(alignment: .leading, spacing: 16) {
-                            Header
-                            Filters
-                            SummaryCards(cardHeight: proxy.size.width/2)
-                            Activities
-                        }
+                    VStack(alignment: .leading, spacing: 16) {
+                        Header
+                        Filters
+                        SummaryCards(cardHeight: proxy.size.width/2)
+                        Activities
+                    }
+                    if viewModel.loading {
+                        LoadingView()
+                    }
+                }
+                .onAppear {
+                    self.viewModel.getInitialData()
+                }
+                .navigationDestination(for: NavigationHomeRoute.self) { route in
+                    switch route {
+                    case .newRegister:
+                        NewRegisterView()
                     }
                 }
             }
@@ -35,7 +48,7 @@ struct HomeView: View {
                     .foregroundStyle(Color.dark)
                 Spacer()
                 Button(action: {
-                    // TODO: Handle
+                    self.viewModel.newRegister()
                 }) {
                     IconImage(.plus)
                 }
@@ -56,17 +69,11 @@ struct HomeView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .center, spacing: 8)  {
                 IconImage(.filter)
-                Pill(label: "Hoy") {
-                    // TODO: Handle
-                }
-                Pill(label: "Esta semana", status: .unselected) {
-                    // TODO: Handle
-                }
-                Pill(label: "Este mes", status: .unselected) {
-                    // TODO: Handle
-                }
-                Pill(label: "Este año", status: .unselected) {
-                    // TODO: Handle
+                ForEach(self.viewModel.reorganizeFilters()) { filter in
+                    Pill(label: filter.label,
+                         status: self.viewModel.isFilterSelected(filter) ? .selected : .unselected) {
+                        self.viewModel.filterSelected(filter)
+                    }
                 }
             }.padding(.horizontal)
         }
@@ -75,12 +82,14 @@ struct HomeView: View {
     @ViewBuilder
     private func SummaryCards(cardHeight: CGFloat) -> some View {
         HStack(alignment: .top, spacing: 8) {
-            BigCard(topText: "Tus ingresos",
-                    bottomText: "$ 10M",
+            BigCard(loading: self.viewModel.loadingTotals,
+                    topText: "Tus ingresos",
+                    bottomText: self.viewModel.totalIncomeText,
                     height: cardHeight)
 
-            BigCard(topText: "Tus gastos",
-                    bottomText: "$ 10M",
+            BigCard(loading: self.viewModel.loadingTotals,
+                    topText: "Tus gastos",
+                    bottomText: self.viewModel.totalOutcomeText,
                     height: cardHeight,
                     color: .secondary)
         }.padding(.horizontal)
@@ -88,24 +97,22 @@ struct HomeView: View {
 
     @ViewBuilder
     private var Activities: some View {
-        let income = Register(title: "Primera quincena de enero", date: "01/01/2025", type: .income, amount: 100)
-        let outcome = Register(title: "Gasto no 1", date: "01/01/2025", type: .outcome, amount: 100)
         VStack(alignment: .leading, spacing: 16) {
             Text("Tus actividades")
                 .font(.title(size: .large))
                 .foregroundStyle(Color.dark)
                 .padding(.horizontal)
-            LazyVStack(alignment: .leading, spacing: 16) {
-                RegisterCellView(viewModel: RegisterCellViewModel(register: income))
-                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
-                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
-                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
-                RegisterCellView(viewModel: RegisterCellViewModel(register: outcome))
+            ScrollView(showsIndicators: false) {
+                LazyVStack(alignment: .leading, spacing: 16) {
+                    ForEach(self.viewModel.registers) { register in
+                        RegisterCellView(viewModel: RegisterCellViewModel(register: register))
+                    }
+                }
             }
         }
     }
 }
 
 #Preview {
-    HomeView()
+    HomeView(viewModel: HomeViewModel())
 }

@@ -9,15 +9,18 @@ import SwiftUI
 
 struct BigCard: View {
 
+    let loading: Bool
     let topText: String
     let bottomText: String
     let height: CGFloat
     let color: Color
 
-    init(topText: String,
+    init(loading: Bool = false,
+         topText: String,
          bottomText: String,
          height: CGFloat = 160,
          color: Color = .primary) {
+        self.loading = loading
         self.bottomText = bottomText
         self.topText = topText
         self.height = height
@@ -27,17 +30,24 @@ struct BigCard: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
-                .fill(self.color)
+                .fill(self.loading ? Color.tertiary.opacity(0.5) : self.color)
             VStack(alignment: .leading) {
-                Text(topText)
-                    .font(.label(size: .medium, weight: .medium))
-                    .foregroundStyle(Color.white)
-                Spacer()
-                HStack {
+                if self.loading {
                     Spacer()
-                    Text(bottomText)
-                        .font(.title())
+                    ProgressView()
+                        .tint(Color.white)
+                    Spacer()
+                } else {
+                    Text(topText)
+                        .font(.label(size: .medium, weight: .medium))
                         .foregroundStyle(Color.white)
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        Text(bottomText)
+                            .font(.title())
+                            .foregroundStyle(Color.white)
+                    }
                 }
             }
             .padding()
@@ -48,6 +58,8 @@ struct BigCard: View {
 }
 
 #Preview {
-    BigCard(topText: "Tus ingresos", bottomText: "$ 10M")
-        .padding()
+    Group {
+        BigCard(topText: "Tus ingresos", bottomText: "$ 10M")
+        BigCard(loading: true, topText: "", bottomText: "")
+    }.padding()
 }
