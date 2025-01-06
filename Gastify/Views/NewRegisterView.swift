@@ -20,18 +20,10 @@ struct NewRegisterView: View {
             Color.white.ignoresSafeArea(.all)
             VStack(alignment: .leading, spacing: 16) {
                 Header
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 16) {
-                        Types
-                        Form
-                    }
-                }
-                HStack {
-                    PrimaryButton(label: "Guardar",
-                                  disabled: self.viewModel.isButtonDisabled) {
-                        self.viewModel.saveNewRegister()
-                    }
-                }.padding(.horizontal)
+                Types
+                Form
+                Spacer()
+                FormButton
             }.padding(.vertical)
         }
         .onAppear {
@@ -84,6 +76,16 @@ struct NewRegisterView: View {
             .keyboardType(.decimalPad)
             .onChange(of: self.viewModel.amount) { _, newValue in
                 self.viewModel.validateAndFormatAmount(newValue)
+            }
+        }.padding(.horizontal)
+    }
+
+    @ViewBuilder
+    private var FormButton: some View {
+        HStack {
+            PrimaryButton(label: "Guardar",
+                          disabled: self.viewModel.isButtonDisabled) {
+                self.viewModel.saveNewRegister()
             }
         }.padding(.horizontal)
     }
