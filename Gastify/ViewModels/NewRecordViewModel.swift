@@ -58,7 +58,7 @@ class NewRecordViewModel: ObservableObject {
         selectedType == type
     }
 
-    func saveNewRegister(completion: () -> Void) {
+    func saveNewRecord(completion: () -> Void) {
         // TODO: Guardar en BD
         completion()
     }

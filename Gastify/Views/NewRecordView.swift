@@ -85,7 +85,7 @@ struct NewRecordView: View {
         HStack {
             PrimaryButton(label: "Guardar",
                           disabled: self.viewModel.isButtonDisabled) {
-                self.viewModel.saveNewRegister {
+                self.viewModel.saveNewRecord {
                     dismiss()
                 }
             }

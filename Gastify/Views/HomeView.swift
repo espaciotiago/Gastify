@@ -30,7 +30,7 @@ struct HomeView: View {
             }
             .sheet(item: self.$viewModel.sheet) { item in
                 switch item {
-                case .newRegister:
+                case .newRecord:
                     NewRecordView(viewModel: NewRecordViewModel())
                 }
             }
@@ -46,7 +46,7 @@ struct HomeView: View {
                     .foregroundStyle(Color.dark)
                 Spacer()
                 Button(action: {
-                    self.viewModel.newRegister()
+                    self.viewModel.newRecord()
                 }) {
                     IconImage(.plus)
                 }
@@ -102,8 +102,8 @@ struct HomeView: View {
                 .padding(.horizontal)
             ScrollView(showsIndicators: false) {
                 LazyVStack(alignment: .leading, spacing: 16) {
-                    ForEach(self.viewModel.registers) { register in
-                        RecordCellView(viewModel: RecordCellViewModel(register: register))
+                    ForEach(self.viewModel.records) { record in
+                        RecordCellView(viewModel: RecordCellViewModel(record: record))
                     }
                 }
             }

@@ -53,11 +53,11 @@ struct RecordCellView: View {
     let outcome3 = Record(id: "5", title: "Gasto no 4", date: Date(), type: .outcome, amount: 1000000)
     let outcome4 = Record(id: "6", title: "Gasto no 4", date: Date(), type: .outcome, amount: 1000000000)
     Group {
-        RecordCellView(viewModel: RecordCellViewModel(register: income))
-        RecordCellView(viewModel: RecordCellViewModel(register: outcome))
-        RecordCellView(viewModel: RecordCellViewModel(register: outcome1))
-        RecordCellView(viewModel: RecordCellViewModel(register: outcome2))
-        RecordCellView(viewModel: RecordCellViewModel(register: outcome3))
-        RecordCellView(viewModel: RecordCellViewModel(register: outcome4))
+        RecordCellView(viewModel: RecordCellViewModel(record: income))
+        RecordCellView(viewModel: RecordCellViewModel(record: outcome))
+        RecordCellView(viewModel: RecordCellViewModel(record: outcome1))
+        RecordCellView(viewModel: RecordCellViewModel(record: outcome2))
+        RecordCellView(viewModel: RecordCellViewModel(record: outcome3))
+        RecordCellView(viewModel: RecordCellViewModel(record: outcome4))
     }.padding()
 }

@@ -7,25 +7,25 @@
 
 struct RecordCellViewModel {
 
-    private let register: Record
+    private let record: Record
 
-    init(register: Record) {
-        self.register = register
+    init(record: Record) {
+        self.record = record
     }
 
     var title: String {
-        register.title
+        record.title
     }
 
     var date: String {
-        register.date.showText()
+        record.date.showText()
     }
 
     var amount: String {
-        "$\(register.amount.toMoneyAmount())"
+        "$\(record.amount.toMoneyAmount())"
     }
 
     var type: RcordType {
-        register.type
+        record.type
     }
 }

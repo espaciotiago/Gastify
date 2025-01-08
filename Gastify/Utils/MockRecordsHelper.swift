@@ -1,5 +1,5 @@
 //
-//  MockRegisterHelper.swift
+//  MockRecordsHelper.swift
 //  Gastify
 //
 //  Created by Santiago Moreno on 5/01/25.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct MockRegisterHelper {
-    static func mockRegisters(count: Int = 20) -> [Record] {
+struct MockRecordsHelper {
+    static func mockRecords(count: Int = 20) -> [Record] {
         let incomeCategories: [(title: String, range: ClosedRange<Double>)] = [
             ("Salario", 2000...5000),
             ("Freelance", 500...2000),
@@ -60,29 +60,29 @@ struct MockRegisterHelper {
         .sorted { $0.date > $1.date }
     }
 
-    static func applyFilter(to registers: [Record], by filter: FilterItem) -> [Record] {
+    static func applyFilter(to records: [Record], by filter: FilterItem) -> [Record] {
         let calendar = Calendar.current
         let now = Date()
 
-        return registers.filter { register in
+        return records.filter { record in
             switch filter {
             case .today:
-                return calendar.isDate(register.date, inSameDayAs: now)
+                return calendar.isDate(record.date, inSameDayAs: now)
 
             case .week:
                 let currentWeekComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now)
-                let registerWeekComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: register.date)
+                let recordWeekComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: record.date)
 
-                return currentWeekComponents.yearForWeekOfYear == registerWeekComponents.yearForWeekOfYear &&
-                currentWeekComponents.weekOfYear == registerWeekComponents.weekOfYear
+                return currentWeekComponents.yearForWeekOfYear == recordWeekComponents.yearForWeekOfYear &&
+                currentWeekComponents.weekOfYear == recordWeekComponents.weekOfYear
 
             case .month:
-                return calendar.component(.month, from: register.date) == calendar.component(.month, from: now) &&
-                calendar.component(.year, from: register.date) == calendar.component(.year, from: now)
+                return calendar.component(.month, from: record.date) == calendar.component(.month, from: now) &&
+                calendar.component(.year, from: record.date) == calendar.component(.year, from: now)
 
             case .year:
                 let oneYearAgo = calendar.date(byAdding: .year, value: -1, to: now)!
-                return register.date >= oneYearAgo && register.date <= now
+                return record.date >= oneYearAgo && record.date <= now
             }
         }
     }

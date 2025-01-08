@@ -9,7 +9,7 @@ import Foundation
 
 enum HomeSheet: Identifiable {
     var id: Self { self }
-    case newRegister
+    case newRecord
 }
 
 class HomeViewModel: ObservableObject {
@@ -19,12 +19,12 @@ class HomeViewModel: ObservableObject {
     @Published var loadingTotals = false
 
     var activeFilter: FilterItem = .today
-    var registers: [Record] = []
+    var records: [Record] = []
     var totalIncome: Double = 0
     var totalOutcome: Double = 0
     let filters: [FilterItem] = [.today, .week, .month, .year]
     // TODO: Remplazar por BD
-    let mockRegisters = MockRegisterHelper.mockRegisters()
+    let mockRecords = MockRecordsHelper.mockRecords()
 
     var totalIncomeText: String {
         return "$\(self.totalIncome.toMoneyAmount())"
@@ -36,7 +36,7 @@ class HomeViewModel: ObservableObject {
 
     func getInitialData() {
         self.getTotals()
-        self.getRegisters()
+        self.getRecords()
     }
 
     func getTotals() {
@@ -49,11 +49,11 @@ class HomeViewModel: ObservableObject {
         }
     }
 
-    func getRegisters() {
+    func getRecords() {
         // TODO: - Cambiar esta logica para obtener la data desde un servicio de BD
         self.loading = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.registers = MockRegisterHelper.applyFilter(to: self.mockRegisters,
+            self.records = MockRecordsHelper.applyFilter(to: self.mockRecords,
                                                             by: self.activeFilter)
             self.loading = false
         }
@@ -61,7 +61,7 @@ class HomeViewModel: ObservableObject {
 
     func filterSelected(_ filter: FilterItem) {
         self.activeFilter = filter
-        self.getRegisters()
+        self.getRecords()
     }
 
     func isFilterSelected(_ filter: FilterItem) -> Bool {
@@ -77,7 +77,7 @@ class HomeViewModel: ObservableObject {
         return newFilters
     }
 
-    func newRegister() {
-        self.sheet = .newRegister
+    func newRecord() {
+        self.sheet = .newRecord
     }
 }
