@@ -23,4 +23,8 @@ class MockDatabaseService: DatabaseServiceProtocol {
     func updateRecord(_ record: Record) async -> Bool {
         return true
     }
+
+    func deleteRecord(_ record: Record) async -> Bool {
+        return true
+    }
 }

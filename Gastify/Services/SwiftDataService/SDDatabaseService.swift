@@ -10,10 +10,10 @@ import SwiftData
 
 @MainActor
 class SDDatabaseService: DatabaseServiceProtocol {
-
+    
     private let container: ModelContainer
     private let context: ModelContext
-
+    
     init() {
         self.container = try! ModelContainer(
             for: SDRecord.self,
@@ -21,13 +21,13 @@ class SDDatabaseService: DatabaseServiceProtocol {
         )
         self.context = ModelContext(container)
     }
-
+    
     func fetchRecords(filter: FilterItem) async -> [Record] {
         let calendar = Calendar.current
         let now = Date()
-
+        
         let predicate: Predicate<SDRecord>
-
+        
         switch filter {
         case .today:
             let startOfDay = calendar.startOfDay(for: now)
@@ -35,14 +35,14 @@ class SDDatabaseService: DatabaseServiceProtocol {
             predicate = #Predicate<SDRecord> { register in
                 register.date >= startOfDay && register.date < endOfDay
             }
-
+            
         case .week:
             let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now))!
             let endOfWeek = calendar.date(byAdding: .day, value: 7, to: startOfWeek)!
             predicate = #Predicate<SDRecord> { register in
                 register.date >= startOfWeek && register.date < endOfWeek
             }
-
+            
         case .month:
             let components = calendar.dateComponents([.year, .month], from: now)
             let startOfMonth = calendar.date(from: components)!
@@ -50,16 +50,16 @@ class SDDatabaseService: DatabaseServiceProtocol {
             predicate = #Predicate<SDRecord> { register in
                 register.date >= startOfMonth && register.date < endOfMonth
             }
-
+            
         case .year:
             let oneYearAgo = calendar.date(byAdding: .year, value: -1, to: now)!
             predicate = #Predicate<SDRecord> { register in
                 register.date >= oneYearAgo && register.date <= now
             }
         }
-
+        
         let descriptor = FetchDescriptor<SDRecord>(predicate: predicate)
-
+        
         do {
             let sdRecords = try context.fetch(descriptor)
             return sdRecords.map { $0.toRecord() }
@@ -68,7 +68,7 @@ class SDDatabaseService: DatabaseServiceProtocol {
             return []
         }
     }
-
+    
     func saveNewRecord(_ record: Record) async -> Bool {
         let sdRecord = SDRecord(id: record.id,
                                 title: record.title,
@@ -83,7 +83,7 @@ class SDDatabaseService: DatabaseServiceProtocol {
             return false
         }
     }
-
+    
     func updateRecord(_ record: Record) async -> Bool {
         let id = record.id
         let categoryPredicate = #Predicate<SDRecord> { $0.recordId == id }
@@ -96,6 +96,24 @@ class SDDatabaseService: DatabaseServiceProtocol {
             }
             existingRecord.title = record.title
             existingRecord.amount = record.amount
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
+    }
+    
+    func deleteRecord(_ record: Record) async -> Bool {
+        let id = record.id
+        let categoryPredicate = #Predicate<SDRecord> { $0.recordId == id }
+        let descriptor = FetchDescriptor<SDRecord>(
+            predicate: categoryPredicate
+        )
+        do {
+            guard let recordToDelete = try context.fetch(descriptor).first else {
+                return false
+            }
+            context.delete(recordToDelete)
             try context.save()
             return true
         } catch {
