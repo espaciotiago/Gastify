@@ -1,5 +1,5 @@
 //
-//  NewRecordView.swift
+//  FormRecordView.swift
 //  Gastify
 //
 //  Created by Santiago Moreno on 5/01/25.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct NewRecordView: View {
+struct FormRecordView: View {
 
     @FocusState private var titleFieldIsFocused
 
     @Environment(\.dismiss) private var dismiss
 
-    @StateObject var viewModel: NewRecordViewModel
+    @StateObject var viewModel: FormRecordViewModel
 
     var body: some View {
         ZStack {
@@ -25,6 +25,9 @@ struct NewRecordView: View {
                 Spacer()
                 FormButton
             }.padding(.vertical)
+            if viewModel.loading {
+                LoadingView()
+            }
         }
         .onAppear {
             self.titleFieldIsFocused = true
@@ -83,7 +86,7 @@ struct NewRecordView: View {
     @ViewBuilder
     private var FormButton: some View {
         HStack {
-            PrimaryButton(label: "Guardar",
+            PrimaryButton(label: self.viewModel.buttonTitle,
                           disabled: self.viewModel.isButtonDisabled) {
                 self.viewModel.saveNewRecord {
                     dismiss()
@@ -94,5 +97,5 @@ struct NewRecordView: View {
 }
 
 #Preview {
-    NewRecordView(viewModel: NewRecordViewModel())
+    FormRecordView(viewModel: FormRecordViewModel())
 }

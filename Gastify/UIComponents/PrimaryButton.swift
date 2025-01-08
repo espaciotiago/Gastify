@@ -26,12 +26,12 @@ struct PrimaryButton: View {
             Text(self.label)
                 .font(.label(weight: .medium))
                 .foregroundStyle(Color.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .padding(.horizontal)
+                .background(RoundedRectangle(cornerRadius: 10).fill(self.disabled ? Color.tertiary.opacity(0.5) : Color.primary))
         }
         .disabled(self.disabled)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
-        .padding(.horizontal)
-        .background(RoundedRectangle(cornerRadius: 10).fill(self.disabled ? Color.tertiary.opacity(0.5) : Color.primary))
     }
 }
 

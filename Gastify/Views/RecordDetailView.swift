@@ -9,22 +9,58 @@ import SwiftUI
 
 struct RecordDetailView: View {
 
+    @Environment(\.dismiss) private var dismiss
+
     @StateObject var viewModel: RecordDetailViewModel
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            RecordCellView(viewModel: RecordCellViewModel(record: self.viewModel.record))
-                .padding(.top)
-            Spacer()
+        ZStack {
+            Color.white.ignoresSafeArea(.all)
+            VStack(alignment: .leading, spacing: 16) {
+                RecordCellView(viewModel: RecordCellViewModel(record: self.viewModel.record))
+                    .padding(.top)
+                Spacer()
+                HStack {
+                    SecondaryButton(label: "Eliminar") {
+                        self.viewModel.showDeleteRecordAlert()
+                    }
+                    PrimaryButton(label: "Editar") {
+                        self.viewModel.updateRecord()
+                    }
+                }.padding()
+            }
+            if viewModel.loading {
+                LoadingView()
+            }
+        }
+        .alert("Eliminar registro",
+               isPresented: self.$viewModel.showDeleteAlert, actions: {
             HStack {
-                SecondaryButton(label: "Eliminar") {
-                    self.viewModel.deleteRecord()
+                Button {
+                    self.viewModel.showDeleteAlert = false
+                } label: {
+                    Text("Cancelar")
                 }
-                PrimaryButton(label: "Editar") {
-                    self.viewModel.updateRecord()
+                Button {
+                    self.viewModel.deleteRecord {
+                        dismiss()
+                    }
+                } label: {
+                    Text("Eliminar")
+                        .foregroundStyle(Color.red)
+                        .fontWeight(.medium)
                 }
-            }.padding()
-        }.navigationTitle("Detalle de registro")
+            }
+        }, message: {
+            Text("¿Estas seguro que deseas eliminar este registro?")
+        })
+        .sheet(item: self.$viewModel.sheet) { item in
+            switch item {
+            case .updateRecord(let record):
+                FormRecordView(viewModel: FormRecordViewModel(record: record))
+            }
+        }
+        .navigationTitle("Detalle de registro")
     }
 }
 

@@ -38,7 +38,7 @@ struct HomeView: View {
                 .sheet(item: self.$viewModel.sheet) { item in
                     switch item {
                     case .newRecord:
-                        NewRecordView(viewModel: NewRecordViewModel())
+                        FormRecordView(viewModel: FormRecordViewModel())
                     }
                 }
             }

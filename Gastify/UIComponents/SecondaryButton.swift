@@ -26,12 +26,12 @@ struct SecondaryButton: View {
             Text(self.label)
                 .font(.label(weight: .medium))
                 .foregroundStyle(Color.secondary)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 12)
+                .padding(.horizontal)
+                .background(RoundedRectangle(cornerRadius: 10).stroke(self.disabled ? Color.tertiary.opacity(0.5) : Color.secondary))
         }
         .disabled(self.disabled)
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 12)
-        .padding(.horizontal)
-        .background(RoundedRectangle(cornerRadius: 10).stroke(self.disabled ? Color.tertiary.opacity(0.5) : Color.secondary))
     }
 }
 
