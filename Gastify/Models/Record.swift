@@ -20,7 +20,7 @@ enum RcordType: String, Identifiable {
     }
 }
 
-struct Record: Identifiable {
+struct Record: Identifiable, Hashable {
     let id: String
     let title: String
     let date: Date

@@ -12,26 +12,34 @@ struct HomeView: View {
     @StateObject var viewModel: HomeViewModel
 
     var body: some View {
-        GeometryReader { proxy in
-            ZStack {
-                Color.white.ignoresSafeArea(.all)
-                VStack(alignment: .leading, spacing: 16) {
-                    Header
-                    Filters
-                    SummaryCards(cardHeight: proxy.size.width/2)
-                    Activities
+        NavigationStack(path: self.$viewModel.path) {
+            GeometryReader { proxy in
+                ZStack {
+                    Color.white.ignoresSafeArea(.all)
+                    VStack(alignment: .leading, spacing: 16) {
+                        Header
+                        Filters
+                        SummaryCards(cardHeight: proxy.size.width/2)
+                        Activities
+                    }
+                    if viewModel.loading {
+                        LoadingView()
+                    }
                 }
-                if viewModel.loading {
-                    LoadingView()
+                .navigationDestination(for: HomeNavigationRoute.self) { route in
+                    switch route {
+                    case .recordDetail(let record):
+                        RecordDetailView(viewModel: RecordDetailViewModel(record: record))
+                    }
                 }
-            }
-            .onAppear {
-                self.viewModel.getInitialData()
-            }
-            .sheet(item: self.$viewModel.sheet) { item in
-                switch item {
-                case .newRecord:
-                    NewRecordView(viewModel: NewRecordViewModel())
+                .onAppear {
+                    self.viewModel.getInitialData()
+                }
+                .sheet(item: self.$viewModel.sheet) { item in
+                    switch item {
+                    case .newRecord:
+                        NewRecordView(viewModel: NewRecordViewModel())
+                    }
                 }
             }
         }
@@ -103,7 +111,11 @@ struct HomeView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(alignment: .leading, spacing: 16) {
                     ForEach(self.viewModel.records) { record in
-                        RecordCellView(viewModel: RecordCellViewModel(record: record))
+                        Button(action: {
+                            self.viewModel.goToDetail(record)
+                        }) {
+                            RecordCellView(viewModel: RecordCellViewModel(record: record))
+                        }
                     }
                 }
             }

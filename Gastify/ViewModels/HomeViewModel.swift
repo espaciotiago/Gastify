@@ -12,8 +12,13 @@ enum HomeSheet: Identifiable {
     case newRecord
 }
 
+enum HomeNavigationRoute: Hashable {
+    case recordDetail(_ record: Record)
+}
+
 class HomeViewModel: ObservableObject {
-    
+
+    @Published var path = [HomeNavigationRoute]()
     @Published var sheet: HomeSheet?
     @Published var loading = false
     @Published var loadingTotals = false
@@ -79,5 +84,9 @@ class HomeViewModel: ObservableObject {
 
     func newRecord() {
         self.sheet = .newRecord
+    }
+
+    func goToDetail(_ record: Record) {
+        self.path.append(.recordDetail(record))
     }
 }
