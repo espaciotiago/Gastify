@@ -17,10 +17,12 @@ class RecordDetailViewModel: ObservableObject {
     @Published var sheet: RecordDetaiSheet?
     @Published var loading = false
     @Published var showDeleteAlert = false
+    @Published var record: Record
+    
+    let databaseService: DatabaseServiceProtocol
 
-    let record: Record
-
-    init(record: Record) {
+    init(_ databaseService: DatabaseServiceProtocol, record: Record) {
+        self.databaseService = databaseService
         self.record = record
     }
 
