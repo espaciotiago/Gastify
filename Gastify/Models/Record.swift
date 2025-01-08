@@ -1,5 +1,5 @@
 //
-//  Register.swift
+//  Record.swift
 //  Gastify
 //
 //  Created by Santiago Moreno on 5/01/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RegisterType: String, Identifiable {
+enum RcordType: String, Identifiable {
     var id: String { rawValue }
     case income = "INCOME"
     case outcome = "OUTCOME"
@@ -20,10 +20,10 @@ enum RegisterType: String, Identifiable {
     }
 }
 
-struct Register: Identifiable {
+struct Record: Identifiable {
     let id: String
     let title: String
     let date: Date
-    let type: RegisterType
+    let type: RcordType
     let amount: Double
 }

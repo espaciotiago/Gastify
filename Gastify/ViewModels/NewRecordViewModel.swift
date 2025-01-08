@@ -1,5 +1,5 @@
 //
-//  NewRegisterViewModel.swift
+//  NewRecordViewModel.swift
 //  Gastify
 //
 //  Created by Santiago Moreno on 5/01/25.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-class NewRegisterViewModel: ObservableObject {
+class NewRecordViewModel: ObservableObject {
 
     @Published var loading = false
-    @Published var selectedType: RegisterType = .income
+    @Published var selectedType: RcordType = .income
     @Published var title: String = ""
     @Published var amount: String = ""
 
-    let types: [RegisterType] = [.income, .outcome]
+    let types: [RcordType] = [.income, .outcome]
     private let maxDigits = 10
     private let maxDecimals = 2
 
@@ -50,15 +50,16 @@ class NewRegisterViewModel: ObservableObject {
         amount = filtered
     }
 
-    func typeSelected(_ type: RegisterType) {
+    func typeSelected(_ type: RcordType) {
         selectedType = type
     }
 
-    func isSelectedType(_ type: RegisterType) -> Bool {
+    func isSelectedType(_ type: RcordType) -> Bool {
         selectedType == type
     }
 
-    func saveNewRegister() {
-        
+    func saveNewRegister(completion: () -> Void) {
+        // TODO: Guardar en BD
+        completion()
     }
 }

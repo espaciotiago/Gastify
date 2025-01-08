@@ -19,7 +19,7 @@ class HomeViewModel: ObservableObject {
     @Published var loadingTotals = false
 
     var activeFilter: FilterItem = .today
-    var registers: [Register] = []
+    var registers: [Record] = []
     var totalIncome: Double = 0
     var totalOutcome: Double = 0
     let filters: [FilterItem] = [.today, .week, .month, .year]

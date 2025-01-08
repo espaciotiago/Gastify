@@ -1,15 +1,15 @@
 //
-//  RegisterCellViewModel.swift
+//  RecordCellViewModel.swift
 //  Gastify
 //
 //  Created by Santiago Moreno on 5/01/25.
 //
 
-struct RegisterCellViewModel {
+struct RecordCellViewModel {
 
-    private let register: Register
+    private let register: Record
 
-    init(register: Register) {
+    init(register: Record) {
         self.register = register
     }
 
@@ -25,7 +25,7 @@ struct RegisterCellViewModel {
         "$\(register.amount.toMoneyAmount())"
     }
 
-    var type: RegisterType {
+    var type: RcordType {
         register.type
     }
 }

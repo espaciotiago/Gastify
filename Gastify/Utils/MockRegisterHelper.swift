@@ -8,7 +8,7 @@
 import Foundation
 
 struct MockRegisterHelper {
-    static func mockRegisters(count: Int = 20) -> [Register] {
+    static func mockRegisters(count: Int = 20) -> [Record] {
         let incomeCategories: [(title: String, range: ClosedRange<Double>)] = [
             ("Salario", 2000...5000),
             ("Freelance", 500...2000),
@@ -38,7 +38,7 @@ struct MockRegisterHelper {
         let now = Date()
 
         return (0..<count).map { _ in
-            let type = Double.random(in: 0...1) < 0.6 ? RegisterType.outcome : RegisterType.income
+            let type = Double.random(in: 0...1) < 0.6 ? RcordType.outcome : RcordType.income
 
             let category = type == .income ?
             incomeCategories.randomElement()! :
@@ -49,7 +49,7 @@ struct MockRegisterHelper {
 
             let amount = Double.random(in: category.range).rounded()
 
-            return Register(
+            return Record(
                 id: UUID().uuidString,
                 title: category.title,
                 date: randomDate,
@@ -60,7 +60,7 @@ struct MockRegisterHelper {
         .sorted { $0.date > $1.date }
     }
 
-    static func applyFilter(to registers: [Register], by filter: FilterItem) -> [Register] {
+    static func applyFilter(to registers: [Record], by filter: FilterItem) -> [Record] {
         let calendar = Calendar.current
         let now = Date()
 

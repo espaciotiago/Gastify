@@ -1,5 +1,5 @@
 //
-//  NewRegisterView.swift
+//  NewRecordView.swift
 //  Gastify
 //
 //  Created by Santiago Moreno on 5/01/25.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct NewRegisterView: View {
+struct NewRecordView: View {
 
     @FocusState private var titleFieldIsFocused
 
     @Environment(\.dismiss) private var dismiss
 
-    @StateObject var viewModel: NewRegisterViewModel
+    @StateObject var viewModel: NewRecordViewModel
 
     var body: some View {
         ZStack {
@@ -85,12 +85,14 @@ struct NewRegisterView: View {
         HStack {
             PrimaryButton(label: "Guardar",
                           disabled: self.viewModel.isButtonDisabled) {
-                self.viewModel.saveNewRegister()
+                self.viewModel.saveNewRegister {
+                    dismiss()
+                }
             }
         }.padding(.horizontal)
     }
 }
 
 #Preview {
-    NewRegisterView(viewModel: NewRegisterViewModel())
+    NewRecordView(viewModel: NewRecordViewModel())
 }

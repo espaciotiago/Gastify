@@ -31,7 +31,7 @@ struct HomeView: View {
             .sheet(item: self.$viewModel.sheet) { item in
                 switch item {
                 case .newRegister:
-                    NewRegisterView(viewModel: NewRegisterViewModel())
+                    NewRecordView(viewModel: NewRecordViewModel())
                 }
             }
         }
@@ -103,7 +103,7 @@ struct HomeView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack(alignment: .leading, spacing: 16) {
                     ForEach(self.viewModel.registers) { register in
-                        RegisterCellView(viewModel: RegisterCellViewModel(register: register))
+                        RecordCellView(viewModel: RecordCellViewModel(register: register))
                     }
                 }
             }
