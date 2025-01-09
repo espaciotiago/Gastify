@@ -90,6 +90,7 @@ class FormRecordViewModel: ObservableObject {
                     }
                 } else {
                     // TODO: Mostrar un error
+                    print("Error al guardar")
                 }
             }
         } else {
@@ -107,6 +108,7 @@ class FormRecordViewModel: ObservableObject {
                     }
                 } else {
                     // TODO: Mostrar un error
+                    print("Error al guardar")
                 }
             }
         }
