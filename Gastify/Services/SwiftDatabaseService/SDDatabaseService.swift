@@ -122,7 +122,26 @@ class SDDatabaseService: DatabaseServiceProtocol {
     }
 
     func getTotals() async -> (income: Double, outcome: Double) {
-        // TODO: Implement
-        return (income: 10000000, outcome: 5100000)
+        do {
+            let incomePredicate = #Predicate<SDRecord> { $0.type == "INCOME" }
+            let outcomePredicate = #Predicate<SDRecord> { $0.type == "OUTCOME" }
+
+            let incomeDescriptor = FetchDescriptor<SDRecord>(
+                predicate: incomePredicate
+            )
+            let outcomeDescriptor = FetchDescriptor<SDRecord>(
+                predicate: outcomePredicate
+            )
+
+            let incomeRecords = try context.fetch(incomeDescriptor)
+            let outcomeRecords = try context.fetch(outcomeDescriptor)
+
+            let income = incomeRecords.reduce(0.0) { $0 + $1.amount }
+            let outcome = outcomeRecords.reduce(0.0) { $0 + $1.amount }
+
+            return (income: income, outcome: outcome)
+        } catch {
+            return (income: 0.0, outcome: 0.0)
+        }
     }
 }
