@@ -37,7 +37,7 @@ struct HomeView: View {
                     self.viewModel.getInitialData()
                 }
                 .sheet(item: self.$viewModel.sheet, onDismiss: {
-                    self.viewModel.getRecords()
+                    self.viewModel.getInitialData()
                 }) { item in
                     switch item {
                     case .newRecord:

@@ -83,6 +83,34 @@ class RMDatabaseService: DatabaseServiceProtocol {
     }
 
     func deleteRecord(_ record: Record) async -> Bool {
-        return true
+        do {
+            let results = realm.objects(RMRecord.self).where { query in
+                query.recordId == record.id
+            }
+            guard let rlmRecord = results.first else {
+                return false
+            }
+            try self.realm.write {
+                realm.delete(rlmRecord)
+            }
+            return true
+        } catch {
+            print("Error saving record: \(error)")
+            return false
+        }
+    }
+
+    func getTotals() async -> (income: Double, outcome: Double) {
+        let records = realm.objects(RMRecord.self)
+
+        let income = records
+            .filter("type == %@", "INCOME")
+            .sum(ofProperty: "amount") as Double
+
+        let outcome = records
+            .filter("type == %@", "OUTCOME")
+            .sum(ofProperty: "amount") as Double
+
+        return (income: income, outcome: outcome)
     }
 }

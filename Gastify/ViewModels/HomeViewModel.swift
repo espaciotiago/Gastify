@@ -48,12 +48,14 @@ class HomeViewModel: ObservableObject {
     }
 
     func getTotals() {
-        // TODO: - Cambiar esta logica para obtener la data desde un servicio de BD
         self.loadingTotals = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.totalIncome = 10000000
-            self.totalOutcome = 500000
-            self.loadingTotals = false
+        Task {
+            let totals = await self.databaseService.getTotals()
+            self.totalIncome = totals.income
+            self.totalOutcome = totals.outcome
+            await MainActor.run {
+                self.loadingTotals = false
+            }
         }
     }
 

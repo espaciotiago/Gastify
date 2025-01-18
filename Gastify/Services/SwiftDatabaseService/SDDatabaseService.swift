@@ -120,4 +120,9 @@ class SDDatabaseService: DatabaseServiceProtocol {
             return false
         }
     }
+
+    func getTotals() async -> (income: Double, outcome: Double) {
+        // TODO: Implement
+        return (income: 10000000, outcome: 5100000)
+    }
 }

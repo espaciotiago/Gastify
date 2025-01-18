@@ -27,4 +27,8 @@ class MockDatabaseService: DatabaseServiceProtocol {
     func deleteRecord(_ record: Record) async -> Bool {
         return true
     }
+
+    func getTotals() async -> (income: Double, outcome: Double) {
+        return (income: 10000000, outcome: 5100000)
+    }
 }
