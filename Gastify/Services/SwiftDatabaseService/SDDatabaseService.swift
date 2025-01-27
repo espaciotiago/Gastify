@@ -23,7 +23,50 @@ class SDDatabaseService: DatabaseServiceProtocol {
     }
 
     func fetchRecords(filter: FilterItem) async -> [Record] {
-        return []
+        let calendar = Calendar.current
+        let now = Date()
+
+        let predicate: Predicate<SDRecord>
+
+        switch filter {
+        case .today:
+            let startOfDay = calendar.startOfDay(for: now)
+            let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay)!
+            predicate = #Predicate<SDRecord> { register in
+                register.date >= startOfDay && register.date < endOfDay
+            }
+
+        case .week:
+            let startOfWeek = calendar.date(from: calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: now))!
+            let endOfWeek = calendar.date(byAdding: .day, value: 7, to: startOfWeek)!
+            predicate = #Predicate<SDRecord> { register in
+                register.date >= startOfWeek && register.date < endOfWeek
+            }
+
+        case .month:
+            let components = calendar.dateComponents([.year, .month], from: now)
+            let startOfMonth = calendar.date(from: components)!
+            let endOfMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth)!
+            predicate = #Predicate<SDRecord> { register in
+                register.date >= startOfMonth && register.date < endOfMonth
+            }
+
+        case .year:
+            let oneYearAgo = calendar.date(byAdding: .year, value: -1, to: now)!
+            predicate = #Predicate<SDRecord> { register in
+                register.date >= oneYearAgo && register.date <= now
+            }
+        }
+
+        let descriptor = FetchDescriptor<SDRecord>(predicate: predicate)
+
+        do {
+            let sdRecords = try context.fetch(descriptor)
+            return sdRecords.map { $0.toRecord() }
+        } catch {
+            // TODO: Implementar caso
+            return []
+        }
     }
 
     func saveNewRecord(_ record: Record) async -> Bool {
