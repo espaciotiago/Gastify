@@ -74,7 +74,7 @@ class FormRecordViewModel: ObservableObject {
         guard let amountDouble = Double(self.amount) else { return }
         self.loading = true
         if let record {
-            let recordToUpdate = Record(id: UUID().uuidString,
+            let recordToUpdate = Record(id: record.id,
                                         title: self.title,
                                         date: record.date,
                                         type: record.type,
