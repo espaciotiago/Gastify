@@ -104,7 +104,21 @@ class SDDatabaseService: DatabaseServiceProtocol {
     }
 
     func deleteRecord(_ record: Record) async -> Bool {
-        return false
+        let id = record.id
+        let categoryPredicate = #Predicate<SDRecord> { $0.recordId == id }
+        let descriptor = FetchDescriptor<SDRecord>(
+            predicate: categoryPredicate
+        )
+        do {
+            guard let recordToDelete = try context.fetch(descriptor).first else {
+                return false
+            }
+            context.delete(recordToDelete)
+            try context.save()
+            return true
+        } catch {
+            return false
+        }
     }
 
     func getTotals() async -> (income: Double, outcome: Double) {
