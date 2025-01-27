@@ -41,7 +41,7 @@ struct HomeView: View {
                 }) { item in
                     switch item {
                     case .newRecord:
-                        FormRecordView(viewModel: FormRecordViewModel(self.viewModel.databaseService))
+                        FormRecordView(viewModel: FormRecordViewModel(self.viewModel.databaseService)) {_ in }
                     }
                 }
             }
