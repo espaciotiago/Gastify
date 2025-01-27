@@ -17,8 +17,7 @@ class RecordDetailViewModel: ObservableObject {
     @Published var sheet: RecordDetaiSheet?
     @Published var loading = false
     @Published var showDeleteAlert = false
-
-    let record: Record
+    @Published var record: Record
 
     let databaseService: DatabaseServiceProtocol
 

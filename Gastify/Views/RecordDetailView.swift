@@ -58,7 +58,11 @@ struct RecordDetailView: View {
             switch item {
             case .updateRecord(let record):
                 FormRecordView(viewModel: FormRecordViewModel(self.viewModel.databaseService,
-                                                              record: record))
+                                                              record: record)) { record in
+                    if let record {
+                        self.viewModel.record = record
+                    }
+                }
             }
         }
         .navigationTitle("Detalle de registro")

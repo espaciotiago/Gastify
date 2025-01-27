@@ -72,7 +72,7 @@ class FormRecordViewModel: ObservableObject {
         self.selectedType == type
     }
 
-    func saveNewRecord(completion: @escaping () -> Void) {
+    func saveNewRecord(completion: @escaping (Record?) -> Void) {
         guard let amountDouble = Double(self.amount) else { return }
         self.loading = true
         if let record {
@@ -86,7 +86,7 @@ class FormRecordViewModel: ObservableObject {
                 if saved {
                     await MainActor.run {
                         self.loading = false
-                        completion()
+                        completion(recordToUpdate)
                     }
                 } else {
                     // TODO: Mostrar un error
@@ -104,7 +104,7 @@ class FormRecordViewModel: ObservableObject {
                 if saved {
                     await MainActor.run {
                         self.loading = false
-                        completion()
+                        completion(nil)
                     }
                 } else {
                     // TODO: Mostrar un error
