@@ -62,6 +62,7 @@ struct RecordDetailView: View {
                     if let record {
                         self.viewModel.record = record
                     }
+                    self.viewModel.sheet = nil
                 }
             }
         }
