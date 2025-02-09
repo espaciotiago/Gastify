@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		29AF10BE2D591C9A00EE9C40 /* Gastify Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gastify Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29AF10E52D59234E00EE9C40 /* Gastify Beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gastify Beta.entitlements"; sourceTree = "<group>"; };
 		29F32B542D2B2BB900AEFBC0 /* Gastify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gastify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F32B662D2B2BBA00AEFBC0 /* GastifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GastifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F32B702D2B2BBA00AEFBC0 /* GastifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GastifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +114,7 @@
 		29F32B4B2D2B2BB900AEFBC0 = {
 			isa = PBXGroup;
 			children = (
+				29AF10E52D59234E00EE9C40 /* Gastify Beta.entitlements */,
 				29F32B972D2B2CA300AEFBC0 /* Gastify */,
 				29F32B692D2B2BBA00AEFBC0 /* GastifyTests */,
 				29F32B732D2B2BBA00AEFBC0 /* GastifyUITests */,
@@ -355,6 +357,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Gastify Beta.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Gastify/Preview Content\"";
@@ -373,7 +376,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.GastifyBeta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.GastifyByPlatziBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -386,6 +389,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-Beta";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Gastify Beta.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Gastify/Preview Content\"";
@@ -404,7 +408,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.GastifyBeta;
+				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.GastifyByPlatziBeta;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -536,6 +540,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Gastify/Gastify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Gastify/Preview Content\"";
@@ -554,7 +559,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.Gastify;
+				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.GastifyByPlatzi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -567,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Gastify/Gastify.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Gastify/Preview Content\"";
@@ -585,7 +591,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.Gastify;
+				PRODUCT_BUNDLE_IDENTIFIER = com.platzi.GastifyByPlatzi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
