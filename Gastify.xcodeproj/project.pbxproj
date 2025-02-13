@@ -39,6 +39,7 @@
 /* Begin PBXFileReference section */
 		29AF10BE2D591C9A00EE9C40 /* Gastify Beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gastify Beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		29AF11F52D59701C00EE9C40 /* Gastify.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gastify.xctestplan; sourceTree = "<group>"; };
+		29C6E5062D5E47CE001DDA0F /* GastifyUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = GastifyUI.xctestplan; path = ../GastifyUI.xctestplan; sourceTree = "<group>"; };
 		29F32B542D2B2BB900AEFBC0 /* Gastify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gastify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F32B662D2B2BBA00AEFBC0 /* GastifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GastifyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		29F32B702D2B2BBA00AEFBC0 /* GastifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GastifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				29AF11F52D59701C00EE9C40 /* Gastify.xctestplan */,
+				29C6E5062D5E47CE001DDA0F /* GastifyUI.xctestplan */,
 				29F32B972D2B2CA300AEFBC0 /* Gastify */,
 				29F32B692D2B2BBA00AEFBC0 /* GastifyTests */,
 				29F32B732D2B2BBA00AEFBC0 /* GastifyUITests */,

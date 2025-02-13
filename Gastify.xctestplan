@@ -4,11 +4,16 @@
       "id" : "40900D77-843A-4998-9413-D75B992BCD27",
       "name" : "Test Scheme Action",
       "options" : {
+        "commandLineArgumentEntries" : [
 
+        ]
       }
     }
   ],
   "defaultOptions" : {
+    "commandLineArgumentEntries" : [
+
+    ],
     "targetForVariableExpansion" : {
       "containerPath" : "container:Gastify.xcodeproj",
       "identifier" : "29F32B532D2B2BB900AEFBC0",
@@ -22,13 +27,6 @@
         "containerPath" : "container:Gastify.xcodeproj",
         "identifier" : "29F32B652D2B2BBA00AEFBC0",
         "name" : "GastifyTests"
-      }
-    },
-    {
-      "target" : {
-        "containerPath" : "container:Gastify.xcodeproj",
-        "identifier" : "29F32B6F2D2B2BBA00AEFBC0",
-        "name" : "GastifyUITests"
       }
     }
   ],
