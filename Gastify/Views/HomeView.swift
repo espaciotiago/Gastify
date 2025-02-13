@@ -24,6 +24,7 @@ struct HomeView: View {
                     }
                     if viewModel.loading {
                         LoadingView()
+                            .accessibilityIdentifier("LoadingIndicator")
                     }
                 }
                 .navigationDestination(for: HomeNavigationRoute.self) { route in
@@ -57,12 +58,14 @@ struct HomeView: View {
                 Text("Gastify")
                     .font(.title())
                     .foregroundStyle(Color.dark)
+                    .accessibilityIdentifier("AppTitle")
                 Spacer()
                 Button(action: {
                     self.viewModel.newRecord()
                 }) {
                     IconImage(.plus)
                 }
+                .accessibilityIdentifier("AddRecordButton")
             }
             VStack(alignment: .leading, spacing: 0)  {
                 Text("Bienvenido de nuevo.")
@@ -85,6 +88,7 @@ struct HomeView: View {
                          status: self.viewModel.isFilterSelected(filter) ? .selected : .unselected) {
                         self.viewModel.filterSelected(filter)
                     }
+                    .accessibilityIdentifier("Filter_\(filter.label)_\(self.viewModel.isFilterSelected(filter) ? "Selected" : "Unselected")")
                 }
             }.padding(.horizontal)
         }
@@ -97,12 +101,14 @@ struct HomeView: View {
                     topText: "Tus ingresos",
                     bottomText: self.viewModel.totalIncomeText,
                     height: cardHeight)
+                .accessibilityIdentifier("IncomeCard")
 
             BigCard(loading: self.viewModel.loadingTotals,
                     topText: "Tus gastos",
                     bottomText: self.viewModel.totalOutcomeText,
                     height: cardHeight,
                     color: .secondary)
+                .accessibilityIdentifier("OutcomeCard")
         }.padding(.horizontal)
     }
 
@@ -121,6 +127,7 @@ struct HomeView: View {
                         }) {
                             RecordCellView(viewModel: RecordCellViewModel(record: record))
                         }
+                        .accessibilityIdentifier("Record_\(record.id)")
                     }
                 }
             }
@@ -131,3 +138,4 @@ struct HomeView: View {
 #Preview {
     HomeView(viewModel: HomeViewModel(MockDatabaseService()))
 }
+

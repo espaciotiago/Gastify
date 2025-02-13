@@ -9,7 +9,16 @@ import SwiftUI
 
 @main
 struct GastifyApp: App {
-    private let databaseService: DatabaseServiceProtocol = SDDatabaseService()
+
+    private let databaseService: DatabaseServiceProtocol
+
+    init() {
+        if ProcessInfo.processInfo.arguments.contains("-UITests") {
+            self.databaseService = MockDatabaseService()
+        } else {
+            self.databaseService = SDDatabaseService()
+        }
+    }
 
     var body: some Scene {
         WindowGroup {
