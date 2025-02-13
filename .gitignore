@@ -1,0 +1,17 @@
+//gitignore for swift with cocoapods
+
+Pods
+.DS_Store
+xcuserdata/
+*.xcodeproj/xcuserdata/
+*.apns
+*.p8
+*.cer
+*.p12
+*.ipa
+*.mobileprovision
+*.dSYM.zip
+*.dSYM
+fastlane/*
+output
+build/
