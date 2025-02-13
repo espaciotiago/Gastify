@@ -12,6 +12,7 @@ xcuserdata/
 *.mobileprovision
 *.dSYM.zip
 *.dSYM
+*.xcuserstate
 fastlane/*
 output
 build/
